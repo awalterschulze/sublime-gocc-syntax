@@ -1,0 +1,57 @@
+{ "name": "GoccBNF",
+  "scopeName": "source.bnf",
+  "fileTypes": ["bnf"],
+  "repository": {
+  	"comments": {
+		"patterns": [
+			{
+				"begin": "/\\*",
+				"end": "\\*/",
+				"name": "comment.block.bnf"
+			},
+			{
+				"begin": "//",
+				"end": "$\\n?",
+				"name": "comment.line.double-slash.bnf"
+			}
+		]
+	},
+	"sdt": {
+		"begin": "<<",
+		"end": ">>",
+		"name": "keyword.source.bnf",
+		"patterns": [
+			{ "include": "#vars" }
+		]
+	},
+	"strings": {
+		"begin": "\"",
+		"end": "\"",
+		"name": "string.quoted.double.bnf"
+	},
+	"chars": {
+		"begin": "'",
+		"end": "'",
+		"name": "string.quoted.double.bnf"
+	},
+	"vars" : { 
+		"match": "\\$(\\d+)",
+		"name": "variable.other.bnf"
+    }
+  },
+  "patterns": [
+  	{ "include": "#comments" },
+  	{ "include": "#sdt" },
+  	{ "include": "#strings" },
+  	{ "include": "#chars" },
+  	{ 
+  		"match": "\\b(builtin)\\b",
+  		"name": "storage.type.proto"
+  	},
+  	{
+  		"match": "\\b\\_([A-Za-z][A-Za-z0-9_]*)\\b",
+		"name": "variable.other.bnf"
+  	}
+  ],
+  "uuid": "aa2d0b78-7845-4803-8f3d-72cf584748af"
+}
