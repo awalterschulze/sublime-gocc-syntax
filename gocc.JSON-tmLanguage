@@ -25,14 +25,71 @@
 		]
 	},
 	"strings": {
-		"begin": "\"",
-		"end": "\"",
-		"name": "string.quoted.double.bnf"
-	},
-	"chars": {
-		"begin": "'",
-		"end": "'",
-		"name": "string.quoted.double.bnf"
+		"patterns": [
+			{
+				"begin": "\"",
+				"end": "\"",
+				"name": "string.quoted.double.bnf",
+				"endCaptures": {
+					"0": {
+						"name": "punctuation.definition.string.end.bnf"
+					}
+				},
+				"beginCaptures": {
+					"0": {
+						"name": "punctuation.definition.string.begin.bnf"
+					}
+				},
+				"patterns": [
+					{
+						"include": "#string_placeholder"
+					},
+					{
+						"include": "#string_escaped_char"
+					}
+				]
+			},
+			{
+				"begin": "'",
+				"end": "'",
+				"name": "string.quoted.single.bnf",
+				"endCaptures": {
+					"0": {
+						"name": "punctuation.definition.string.end.bnf"
+					}
+				},
+				"beginCaptures": {
+					"0": {
+						"name": "punctuation.definition.string.begin.bnf"
+					}
+				},
+				"patterns": [
+					{
+						"include": "#string_escaped_char"
+					}
+				]
+			},
+			{
+				"endCaptures": {
+					"0": {
+						"name": "punctuation.definition.string.end.bnf"
+					}
+				},
+				"begin": "`",
+				"end": "`",
+				"name": "string.quoted.raw.bnf",
+				"beginCaptures": {
+					"0": {
+						"name": "punctuation.definition.string.begin.bnf"
+					}
+				},
+				"patterns": [
+					{
+						"include": "#string_placeholder"
+					}
+				]
+			}
+		]
 	},
 	"vars" : { 
 		"match": "\\$(\\d+)",
@@ -43,7 +100,6 @@
   	{ "include": "#comments" },
   	{ "include": "#sdt" },
   	{ "include": "#strings" },
-  	{ "include": "#chars" },
   	{ 
   		"match": "\\b(builtin)\\b",
   		"name": "storage.type.proto"
